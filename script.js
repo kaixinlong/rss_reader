@@ -50,6 +50,20 @@ function addRSStoDOM(data) {
   content.appendChild(itemsContainer);
 }
 
+var content = document.getElementsByTagName('main')[0];
+
+var xhr = new XMLHttpRequest();
+xhr.onload = function() {
+  if (xhr.status >=200 && xhr.status < 300) {
+    json = JSON.parse(xhr.responseText);
+    console.log(json);
+    addRSStoDOM(json);
+  }else{
+    console.log("the request failed");
+    content.innerHTML = "The request failed, please check your RSS url";
+  }
+}
+
 // The following gets the ADD RSS button to work.  This is a very similar
 // process that we did in the ToDo application.  Find the elements in
 // the HTML, then write a function to handle the element/event, then add
@@ -65,7 +79,7 @@ function onAddRSSClicked(event) {
   // Create and send a GET request
   // The first argument is the post type (GET, POST, PUT, DELETE, etc.)
   // The second argument is the endpoint URL
-  let xhr = new XMLHttpRequest();
+
   xhr.open('GET', 'https://api.rss2json.com/v1/api.json?rss_url=' + URL);
   xhr.send();
 }
