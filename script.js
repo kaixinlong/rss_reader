@@ -65,6 +65,7 @@ function onAddRSSClicked(event) {
   // Create and send a GET request
   // The first argument is the post type (GET, POST, PUT, DELETE, etc.)
   // The second argument is the endpoint URL
+  let xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://api.rss2json.com/v1/api.json?rss_url=' + URL);
   xhr.send();
 }
